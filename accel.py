@@ -8,8 +8,9 @@ def doLog():
     y = accelerometer.get_y()
     z = accelerometer.get_z()
     a = accelerometer.get_values()
-    
+
     coords = "{},{},{}\n".format(x, y, z)
+    coords = f"{x},{y},{z}\n"
     # print(coords)
     acceleration = math.sqrt(x**2 + y**2 + z**2)
     # print("acceleration (milli-gs)", acceleration)
@@ -45,5 +46,5 @@ while True:
     elif button_b.is_pressed():
         display.show(Image.ANGRY)
         break
-        
-        
+
+
