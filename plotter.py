@@ -37,12 +37,16 @@ def getDatalog(x,y,z):
     '''
     name = "datalog.txt"
     with open(name, "r") as f:
-
+        first=True   
         for line in f:
-            coords = line.split(',')
-            x.append(int(coords[0]))
-            y.append(int(coords[1]))
-            z.append(int(coords[2].strip()))
+            coords = line.strip().split(',')
+            print(coords)
+            if first:
+                first=False
+            else:
+                x.append(int(coords[0]))
+                y.append(int(coords[1]))
+                z.append(int(coords[2].strip()))
         print(x,y,z)
     return x,y,z
 
