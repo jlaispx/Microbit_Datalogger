@@ -18,13 +18,13 @@ def doCalibrate():
         sleep(100)
         if i%10==0:
             display.show(int(i/10))
-    xoff = round(x/iters) # calculate average offset
+    xoff = round(x/iters) #calculate average offset
     yoff = round(y/iters)
     gravity = round(z/iters)
     print(xoff, yoff, gravity)
 
 def doLog():
-    global xoff, yoff, gravity # pass calibration offsets
+    global xoff, yoff, gravity#pass calibration offsets
     x = accelerometer.get_x()-xoff
     y = accelerometer.get_y()-yoff
     z = accelerometer.get_z()-gravity

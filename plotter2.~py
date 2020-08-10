@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------------
-# Name:        plotter
-# Purpose:     plots a 3D graph representing path of a datalogger using microbit
+# Name:        plotter 2
+# Purpose:
 #
 # Author:      jlai
 #
@@ -15,6 +15,18 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 mpl.rcParams['legend.fontsize'] = 10
+
+def getDistFromAcc(arrAcc):
+    t=0.2
+    vi=0
+    aD=[]
+    for a in arrAcc:
+        vf = vi + a*t
+        d = (vi + vf)*t/2
+        aD.append(d)
+        print(a,d)
+    return aD
+
 
 test=True
 def getDatalog(x,y,z):
@@ -36,26 +48,36 @@ def getDatalog(x,y,z):
                 z - array filled in with all z co-ords
     '''
     name = "datalog.txt"
+    xcurr = 0
+    ycurr = 0
+    zcurr = 0
     with open(name, "r") as f:
-        first=False #True
+        first=True
         for line in f:
             coords = line.strip().split(',')
             print(coords)
             if first:
                 first=False
             else:
-                x.append(int(coords[0]))
-                y.append(int(coords[1]))
-                z.append(int(coords[2].strip()))
-        print(x,y,z)
+                xcurr = (int(coords[0]))
+                ycurr = (int(coords[1]))
+                zcurr = (int(coords[2].strip()))
+
+                x.append(xcurr)
+                y.append(ycurr)
+                z.append(zcurr)
+        print(f"x[] = {x}")
+        print(f"y[] = {y}")
+        print(f"z[] = {z}")
     return x,y,z
 
-def drawPath(x,y,z):
+def drawPath(x,y,z,vLabel):
     '''
      Input:
                 x - array filled in with all x co-ords
                 y - array filled in with all y co-ords
                 z - array filled in with all z co-ords
+                vLabel - label the Graph
      Process:
                 Creates the 3D Axes
                 Plots using x,y,z co-ords
@@ -67,7 +89,7 @@ def drawPath(x,y,z):
     ax = fig.gca(projection='3d')
 
     #
-    ax.plot(x, y, z, label='flight path')
+    ax.plot(x, y, z, label=vLabel)
     ax.legend()
 
     plt.show()
@@ -76,8 +98,16 @@ def main():
     x=[]
     y=[]
     z=[]
-    x,y,z = getDatalog(x,y,z)
-    drawPath(x,y,z)
+    x,y,z = getDatalog(x,y,z)  #Gets Accelerations
+    drawPath(x,y,z,"Acceleration")
+
+    print("x")
+    xd=getDistFromAcc(x)
+    print("y")
+    yd=getDistFromAcc(y)
+    print("d")
+    zd=getDistFromAcc(z)
+    drawPath(xd,yd,zd,"Flight Path (distance)")
 
 if __name__ == '__main__':
     main()
