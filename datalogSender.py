@@ -20,9 +20,10 @@ def radioStart():
             msg = incoming.split(" ")
             if (msg[0] == id) & (msg[1] == "ACK"):
                 display.show
-                
+
 def radioStop():
     radio.send(msg2)
+
 initRadio()
 display.clear()
 while True:

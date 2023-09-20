@@ -1,6 +1,7 @@
 from microbit import *
 import os
 import radio
+
 name = "datalog.txt"
 gravity = -992 #default offset gravity
 xoff =0
@@ -10,9 +11,8 @@ def initRadio():
     radio.on
     radio.config(channel=19, power=7)
 
-
-
 def doCalibrate():
+    # Calibrate the Microbit to cancel out movement of the rock
     global xoff, yoff, gravity
     iters=100
     x=0
@@ -47,7 +47,7 @@ def startLogging():
             f.write("{},{},{}\n".format(xoff,yoff, gravity))
             while True:
                 coords = doLog()
-                buf = "{}\n".format(coords)    
+                buf = "{}\n".format(coords)
                 f.write(buf)
                 print(buf)
                 if os.size(name) > 25000:

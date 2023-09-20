@@ -27,7 +27,7 @@ while True:
     sleep(20)
     if start:
         sendData()
-        
+
     message = radio.receive()
     if message=="start":
         start=True
@@ -35,4 +35,3 @@ while True:
     elif message=="stop":
         start=False
         display.show(Image.SAD)
-        

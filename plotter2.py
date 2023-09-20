@@ -42,12 +42,13 @@ def getDistFromAcc2(arrAcc):  # Keegan
     vi=0
     distanceArray=[0]
     d=0
+    print("Keegan")
     for a in arrAcc:
         a *=9.8/1000
-        d = vi*t + 0.5*a*(t**2)
+        d += vi*t + 0.5*a*(t**2)
         vi += a*t
         distanceArray.append(d)
-        #print(a,d)
+        print(a,vi,d)
     return distanceArray
 
 
@@ -59,7 +60,7 @@ def getDistFromAcc3(arrAcc): #mine
     for a in arrAcc:
         a *=9.8/1000
         vf = vi + a*t
-        d = (vi + vf)*t/2
+        d += (vi + vf)*t/2
         vi = vf
         distanceArray.append(d)
         #print(a,d)

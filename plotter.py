@@ -5,6 +5,7 @@
 # Author:      jlai
 #
 # Created:     26/09/2018
+# Modified:    21/09/2023 - upgraded matplotlib to version 3.8.0
 # Copyright:   (c) jlai 2018
 # Licence:     <your licence>
 #-------------------------------------------------------------------------------
@@ -35,7 +36,7 @@ def getDatalog(x,y,z):
                 y - array filled in with all y co-ords
                 z - array filled in with all z co-ords
     '''
-    name = "datalog.txt"
+    name = "datalog2.txt"
     with open(name, "r") as f:
         first=False #True
         for line in f:
@@ -64,9 +65,10 @@ def drawPath(x,y,z):
     '''
     fig = plt.figure()
     # Create 3D Axes
-    ax = fig.gca(projection='3d')
+    #ax = fig.gca(projection='3d')  # Older version
+    ax = fig.add_subplot(projection="3d")  # matplotlib v3.8.0
 
-    #
+    # using arrays of x,y,z co-ords, draw flightpath
     ax.plot(x, y, z, label='flight path')
     ax.legend()
 
